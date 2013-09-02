@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+
+{{if k==1 :}}
+<center>
+<h3> Hurrahhh  ..... IMAGE deleted  !!
+</center>
+<h4>All images</h4>
+    {{for image in images:}} 
+        {{=LI(A(image.title , _href=URL('show' , args=image.id)))}}
+    {{pass}}
+{{pass}}
+
+{{if k==0:}}
+<center>
+<h3> DONT ACT SMART </h3>
+</center>
+<h4>All images</h4>
+    {{for image in images:}} 
+        {{=LI(A(image.title , _href=URL('show' , args=image.id)))}}
+    {{pass}}
+{{pass}}

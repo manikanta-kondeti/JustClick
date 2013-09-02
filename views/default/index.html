@@ -1,0 +1,27 @@
+{{extend 'layout.html'}}
+<table  border=0>
+<tr>
+<td>
+<h3>TO HAVE FUN ....  'JUST CLICK' </h3>
+<h4> All IMages</h4>
+<ul>
+{{for image in images:}}
+{{=LI(A(image.title, _href=URL("show", args=image.id)))}}
+{{pass}}
+</ul>
+</td>
+<td>
+<h3>
+{{=LI(A("UPLOAD IMAGE HERE " , _href=URL("upload" , args=123)))}}
+</h3>
+</td>
+</tr<>
+</table>
+{{if auth.has_membership('Admin') ==1 :}}
+    <h4> Can Make adnin</h4>
+        {{for user in users:}}
+            {{if auth.has_membership('Admin',user.id) ==0:}}
+                {{=LI(A('Promote' + user.first_name + 'to an Admin',_href=URL("admns",args=user.id)))}}
+            {{pass}} 
+        {{pass}}       
+{{pass}}

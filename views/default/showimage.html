@@ -1,0 +1,51 @@
+{{extend 'layout.html'}}
+
+<p>
+{{=LI(A("UPLOAD IMAGE HERE " , _href=URL("upload" , args=123)))}}
+</p>
+
+
+<table border=0>
+<tr>
+<td>
+<h4>Image Posted by {{=image.uploaded_by}}: {{=image.title}}</h4>
+<center>
+<img width="600px"
+     src="{{=URL('download', args=image.file)}}" />
+</center>    
+ 
+<table border=0>
+<tr>
+<td>
+{{=LI(A('Like' , _href=URL("show" , args=image.uploaded_by)))}} 
+</td>
+<td>
+{{=LI(A('Hide Comments' , _href=URL("show" , args=image.id)))}}
+</td>
+<td>
+{{=LI(A('Delete' , _href=URL("delete" , args=image.id)))}}
+</td>
+</tr>
+</table>
+ 
+{{if len(comments):}}
+  <h3>Comments</h3><br /><p>
+  {{for comment in comments:}}
+    <p>{{=comment.author}} says <i>{{=comment.body}}</i></p>
+  {{pass}}</p>
+{{else:}}
+  <h4>No comments posted yet</h4>
+{{pass}}
+<h5>Post a comment</h5>
+{{=form}}
+</td>
+<td>
+<h4>All Images</h4>
+<ul>
+{{for image in allimages:}}
+{{=LI(A(image.title, _href=URL("show", args=image.id)))}}
+{{pass}}
+</ul>
+</td>
+</tr>
+</table>

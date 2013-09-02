@@ -1,0 +1,9 @@
+{{extend 'layout.html'}}
+
+<h2>Image Upload Portal</h2>
+{{=form}}
+
+<h2>ALL IMAGES</h2>
+{{for image in allimages:}}
+{{=LI(A(image.title , _href=URL("show" , args=image.id)))}}
+{{pass}}

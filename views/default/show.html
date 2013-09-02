@@ -1,0 +1,48 @@
+{{extend 'layout.html'}}
+
+<p>
+{{=LI(A("UPLOAD IMAGE HERE " , _href=URL("upload" , args=123)))}}
+<p>
+{{w = auth.user.first_name+'_'+auth.user.last_name}}
+
+<table border=0>
+<tr>
+<td>
+<h4>Image Posted by {{=image.uploaded_by}}: {{=image.title}}</h4>
+<h4>URL is  <a href="{{=image.url}}"> please click here</a></h4>
+<center>
+<img width="600px"
+     src="{{=URL('download', args=image.file)}}" />
+</center>
+NO. OF LIKES : {{=image.likecount}}
+<table border=0>
+<tr>
+<td>
+{{if not db(w==db.like.name)(image.id==db.like.imageid).select(db.like.ALL):}}
+{{=LI(A('Like' , _href=URL("like" , args=[w,image.id,image.likecount+1])))}}
+{{pass}}
+</td>
+<td>
+{{=LI(A('Show Comments' , _href=URL("showimagecomments" , args=image.id)))}}
+</td>
+<td>
+{{if image.uploaded_by == auth.user.first_name : }}
+{{=LI(A('Delete' , _href=URL("delete" , args=[image.uploaded_by,image.id])))}}
+{{pass}}
+</td>
+<td>
+{{=LI(A('Delete as admin' , _href=URL("deleteasadmin" , args=image.id)))}}
+</td>
+</tr>
+</table>
+</td>
+<td>
+</td>
+<td>
+<h4>All images</h4>
+{{for image in images:}}
+    {{=LI(A(image.title , _href=URL('show' , args=image.id)))}}
+{{pass}}
+</td>
+</tr>
+</table>
